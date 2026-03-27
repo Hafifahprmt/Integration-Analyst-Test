@@ -1,0 +1,62 @@
+openapi: 3.1.0
+info:
+  title: Loan Application API - PT. XYZ
+  description: API terintegrasi untuk menangani pengajuan pinjaman online pada aplikasi mobile PT. XYZ.
+  version: 1.0.0
+
+paths:
+  /v1/loans/apply:
+    post:
+      summary: Submit Loan Application
+      description: Endpoint ini digunakan oleh aplikasi mobile untuk mengirimkan data pengajuan pinjaman nasabah ke sistem backend.
+      operationId: submitLoan
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - user_id
+                - loan_amount
+                - tenure_months
+              properties:
+                user_id:
+                  type: string
+                  description: ID nasabah yang terdaftar di Core Banking.
+                  example: "CUST-1002"
+                loan_amount:
+                  type: number
+                  description: Nominal pinjaman yang diajukan (Rupiah).
+                  example: 5000000
+                tenure_months:
+                  type: integer
+                  description: Durasi pinjaman dalam bulan.
+                  enum: [3, 6, 12, 24]
+                  example: 12
+                purpose:
+                  type: string
+                  description: Alasan pengajuan pinjaman.
+                  example: "Renovasi Rumah"
+      responses:
+        '201':
+          description: Pengajuan berhasil dibuat (Created).
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  loan_id:
+                    type: string
+                    example: "L-2026-X88"
+                  status:
+                    type: string
+                    example: "IN_REVIEW"
+        '400':
+          description: Bad Request - Input data tidak sesuai format.
+        '401':
+          description: Unauthorized - Sesi login tidak valid.
+        '422':
+          description: Unprocessable Entity - Gagal validasi bisnis (misal: skor kredit rendah).
+        '500':
+          description: Internal Server Error - Masalah koneksi ke Core Banking System.
