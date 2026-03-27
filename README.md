@@ -1,7 +1,12 @@
 # Technical Assessment: Integration Analyst - PT. XYZ
 
-Dokumen ini berisi penjelasan mengenai arsitektur sistem dan integrasi untuk pengembangan aplikasi pinjaman online (pinjol) di PT. XYZ.
+Repositori ini berisi rancangan arsitektur sistem dan spesifikasi integrasi untuk pengembangan aplikasi pinjaman online (pinjol) mobile di PT. XYZ. 
 
+## Project Resources
+*  **[Loan API Specification](./loan-api-spec.yml)** - Kontrak teknis API menggunakan standar OpenAPI 3.1.
+*  **[Technical Rationale](./rationale.md)** - Penjelasan mendalam mengenai keputusan desain dan alur integrasi.
+
+---
 ## 1. Deskripsi Arsitektur & Alur Integrasi (System Flow)
 
 Berdasarkan diagram sistem yang ada, berikut adalah urutan alur kerja dari sisi pengguna hingga ke sistem inti perbankan:
