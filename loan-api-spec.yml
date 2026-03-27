@@ -1,0 +1,54 @@
+openapi: 3.1.0
+info:
+  title: Loan Application API - PT. XYZ
+  description: API untuk menghandle pengajuan pinjaman online pada aplikasi mobile PT. [cite_start]XYZ. [cite: 2]
+  version: 1.0.0
+
+paths:
+  /v1/loans/apply:
+    post:
+      summary: Submit Loan Application
+      description: Endpoint untuk nasabah mengajukan pinjaman baru.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: string
+                  example: "USR-12345"
+                amount:
+                  type: number
+                  description: Nominal pinjaman yang diajukan.
+                  example: 5000000
+                tenure_months:
+                  type: integer
+                  description: Jangka waktu pinjaman (bulan).
+                  example: 12
+                purpose:
+                  type: string
+                  example: "Modal Usaha"
+              required:
+                - user_id
+                - amount
+                - tenure_months
+      responses:
+        '201':
+          description: Pengajuan berhasil diterima.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  loan_id:
+                    type: string
+                    example: "LOAN-88990"
+                  status:
+                    type: string
+                    example: "PENDING_VERIFICATION"
+        '400':
+          description: Input tidak valid (Bad Request).
+        '401':
+          description: Sesi tidak sah (Unauthorized).
